@@ -1,0 +1,37 @@
+services:
+  postgres:
+    container_name: postgres-container
+    image: postgres:${POSTGRES_VERSION}
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    networks:
+      - backend
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin-container
+    image: dpage/pgadmin4:${PGADMIN_VERSION}
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - ${PGADMIN_PORT}:${PGADMIN_PORT_SMALL}
+    networks:
+      - backend
+    restart: unless-stopped
+
+networks:
+  backend:
+    name: backend
+    driver: bridge
+
+volumes:
+  postgres_data:
+  pgadmin:

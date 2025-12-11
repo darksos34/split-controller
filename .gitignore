@@ -34,7 +34,4 @@ build/
 
 
 ### Sealed secrets ###
-application.yaml
-application-*.yaml
-docker-compose.yaml
 .env
