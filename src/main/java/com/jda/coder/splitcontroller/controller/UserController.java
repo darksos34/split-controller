@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ *  UserController connect the UserApi endpoints to the UserService for handling user-related operations.
+ *  Dependency injection is used to provide the UserService instance.
+ */
 @RestController
 @RequiredArgsConstructor
 public class UserController implements UserApi {
 
     private final UserService userService;
-
 
     @Override
     public ResponseEntity<User> getUser(UUID uuid) {
